@@ -1,6 +1,6 @@
-name:Tamato Leaf Disease Predictor CI
+name: Plant Disease Predictor CI
 
-on:
+'on':
   push:
     branches:
       - main
