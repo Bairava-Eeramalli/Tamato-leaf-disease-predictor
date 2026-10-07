@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: plant-disease-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: plant-disease
+  template:
+    metadata:
+      labels:
+        app: plant-disease
+    spec:
+      containers:
+        - name: plant-disease-container
+          image: tamato-leaf-disease-predictor-app:1.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8501
