@@ -1,4 +1,4 @@
-name: Plant Disease Predictor CI
+name: Plant Disease Predictor CI/CD
 
 'on':
   push:
@@ -19,9 +19,15 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Build Docker image
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push Docker image
         uses: docker/build-push-action@v6
         with:
           context: .
-          push: false
-          tags: tamato-leaf-disease-predictor-app:ci
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/tamato-leaf-disease-predictor-app:latest
